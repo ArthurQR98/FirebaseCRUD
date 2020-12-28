@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">FirebaseCRUD</string>
+    <string name="all">TODO</string>
+    <string name="metro">Super Mercado METRO</string>
+    <string name="name">Coca Cola</string>
+    <string name="title_activity_main">PRODUCTOS</string>
+    <string name="subtitle_activity_main">De la categoria</string>
+    <string name="title_activity_add">Nuevo producto</string>
+    <string name="name_form">Descripción</string>
+    <string name="categoria_form">Categoria</string>
+    <string name="url_form">Url</string>
+    <string name="precio_form">Precio</string>
+    <string name="stock_form">Nro. en Stock</string>
+    <string name="save">Guardar</string>
+    <string name="description">Bebida azucarada,deliciosa y refrescante</string>
+    <string name="title_activity_edit">Datos del producto</string>
+    <string name="textView3">Nuevo Producto</string>
+</resources>

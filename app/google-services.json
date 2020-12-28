@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "958317319568",
+    "project_id": "fir-producto",
+    "storage_bucket": "fir-producto.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958317319568:android:6c5ee410d4d597b71dcf15",
+        "android_client_info": {
+          "package_name": "com.example.firebasecrud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "958317319568-93057pbnh8lac9mus55lj6vj2ksjamjn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHINQ7I0hZe4zvjAlpTzRh7gB13Ik5Flw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "958317319568-93057pbnh8lac9mus55lj6vj2ksjamjn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
