@@ -1,5 +1,6 @@
 package com.example.firebasecrud;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -32,7 +33,7 @@ public class EditActivity extends AppCompatActivity {
     @BindView(R.id.precioEditText)
     EditText mprecioEditText;
 
-    @BindView(R.id.stockEditText)
+    @BindView(R.id.stockEditText2)
     EditText mstockEditText;
 
     @BindView(R.id.productButton)
@@ -45,6 +46,7 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         ButterKnife.bind(this);
+
         String mKey= Objects.requireNonNull(getIntent().getExtras()).getString("key");
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("character").child(mKey);
@@ -83,10 +85,10 @@ public class EditActivity extends AppCompatActivity {
         mCharacterButton.setOnClickListener(v -> {
             mDatabaseReference.child("descripcion").setValue(mdescripcionEditText.getText().toString());
             mDatabaseReference.child("categoria").setValue(mcategoriaEditText.getText().toString());
-            mDatabaseReference.child("precio").setValue(Double.parseDouble(mprecioEditText.getText().toString()));
+            mDatabaseReference.child("precio").setValue(Float.parseFloat(mprecioEditText.getText().toString()));
             mDatabaseReference.child("stock").setValue(Integer.parseInt(mstockEditText.getText().toString()));
             mDatabaseReference.child("url").setValue(Integer.parseInt(mUrlEditText.getText().toString()));
-
+            finish();
         });
     }
 }
