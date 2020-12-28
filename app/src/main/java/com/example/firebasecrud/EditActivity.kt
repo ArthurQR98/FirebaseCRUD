@@ -1,94 +1,71 @@
-package com.example.firebasecrud;
+package com.example.firebasecrud
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.*
+import java.lang.String
+import java.util.*
 
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.Objects;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-public class EditActivity extends AppCompatActivity {
-
-    @BindView(R.id.descripcionEditText)
-    EditText mdescripcionEditText;
-
-    @BindView(R.id.categoriaEditText)
-    EditText mcategoriaEditText;
-
-    @BindView(R.id.urlEditText)
-    EditText mUrlEditText;
-
-    @BindView(R.id.precioEditText)
-    EditText mprecioEditText;
-
-    @BindView(R.id.stockEditText2)
-    EditText mstockEditText;
-
-    @BindView(R.id.productButton)
-    Button mCharacterButton;
-
-    private DatabaseReference mDatabaseReference;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
-        ButterKnife.bind(this);
-
-        String mKey= Objects.requireNonNull(getIntent().getExtras()).getString("key");
-
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("character").child(mKey);
-
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Product character = dataSnapshot.getValue(Product.class);
-
-                if (character.getDescripcion() != null) {
-                    mdescripcionEditText.setText(character.getDescripcion());
+class EditActivity : AppCompatActivity() {
+    @JvmField
+    var mdescripcionEditText: EditText? = null
+    @JvmField
+    var mcategoriaEditText: EditText? = null
+    @JvmField
+    var mUrlEditText: EditText? = null
+    @JvmField
+    var mprecioEditText: EditText? = null
+    @JvmField
+    var mstockEditText: EditText? = null
+    @JvmField
+    var mCharacterButton: Button? = null
+    private var mDatabaseReference: DatabaseReference? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_edit)
+        FindViews()
+        val mKey = Objects.requireNonNull(intent.extras)?.getString("key")
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("character").child(mKey!!)
+        mDatabaseReference!!.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val character = dataSnapshot.getValue(Product::class.java)
+                if (character!!.descripcion != null) {
+                    mdescripcionEditText!!.setText(character.descripcion)
                 }
-
-                if (character.getCategoria()!= null) {
-                    mcategoriaEditText.setText(character.getCategoria());
+                if (character.categoria != null) {
+                    mcategoriaEditText!!.setText(character.categoria)
                 }
-
-                if (character.getPrecio() != null) {
-                    mprecioEditText.setText(String.valueOf(character.getPrecio()));
+                if (character.precio != null) {
+                    mprecioEditText!!.setText(character.precio.toString())
                 }
-
-                mstockEditText.setText(String.valueOf(character.getStock()));
-
-
-                mUrlEditText.setText(String.valueOf(character.getUrl()));
-
+                mstockEditText!!.setText(String.valueOf(character.stock))
+                mUrlEditText!!.setText(String.valueOf(character.url))
             }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Toast.makeText(EditActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@EditActivity, error.message, Toast.LENGTH_SHORT).show()
             }
-        });
+        })
+        mCharacterButton!!.setOnClickListener { v: View? ->
+            mDatabaseReference!!.child("descripcion").setValue(mdescripcionEditText!!.text.toString())
+            mDatabaseReference!!.child("categoria").setValue(mcategoriaEditText!!.text.toString())
+            mDatabaseReference!!.child("precio").setValue(java.lang.Float.valueOf(mprecioEditText!!.text.toString()))
+            mDatabaseReference!!.child("stock").setValue(mstockEditText!!.text.toString().toInt())
+            mDatabaseReference!!.child("url").setValue(mUrlEditText!!.text.toString().toInt())
+            finish()
+        }
+    }
 
-        mCharacterButton.setOnClickListener(v -> {
-            mDatabaseReference.child("descripcion").setValue(mdescripcionEditText.getText().toString());
-            mDatabaseReference.child("categoria").setValue(mcategoriaEditText.getText().toString());
-            mDatabaseReference.child("precio").setValue(Float.valueOf(mprecioEditText.getText().toString()));
-            mDatabaseReference.child("stock").setValue(Integer.parseInt(mstockEditText.getText().toString()));
-            mDatabaseReference.child("url").setValue(Integer.parseInt(mUrlEditText.getText().toString()));
-            finish();
-        });
+    fun FindViews() {
+        mdescripcionEditText = findViewById(R.id.descripcionEditText)
+        mcategoriaEditText = findViewById(R.id.categoriaEditText)
+        mUrlEditText = findViewById(R.id.urlEditText)
+        mprecioEditText = findViewById(R.id.precioEditText)
+        mstockEditText = findViewById(R.id.stockEditText2)
+        mCharacterButton = findViewById(R.id.productButton)
     }
 }

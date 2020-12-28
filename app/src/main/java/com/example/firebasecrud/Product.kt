@@ -1,78 +1,23 @@
-package com.example.firebasecrud;
+package com.example.firebasecrud
 
-import com.google.firebase.database.Exclude;
+import com.google.firebase.database.Exclude
 
-public class Product {
+class Product {
+    @get:Exclude
+    @set:Exclude
+    var key: String? = null
+    var descripcion: String? = null
+    var categoria: String? = null
+    var precio: Float? = null
+    var stock = 0
+    var url = 0
 
-    private String key;
-    private String descripcion;
-    private String categoria;
-    private Float precio;
-    private int stock;
-    private int url;
-
-    public Product() {
-    }
-
-
-    public Product(String descripcion, String categoria, Float precio, int stock, int url) {
-        this.descripcion = descripcion;
-        this.categoria = categoria;
-        this.precio = precio;
-        this.stock=stock;
-        this.url = url;
-
-
-
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-
-    public Float getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Float precio) { this.precio = precio;}
-
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) { this.stock =stock;}
-
-
-    public int getUrl() {
-        return url;
-    }
-
-    public void setUrl(int url) {
-        this.url = url;
-    }
-
-    @Exclude
-    public String getKey() {
-        return key;
-    }
-
-    @Exclude
-    public void setKey(String key) {
-        this.key = key;
+    constructor() {}
+    constructor(descripcion: String?, categoria: String?, precio: Float?, stock: Int, url: Int) {
+        this.descripcion = descripcion
+        this.categoria = categoria
+        this.precio = precio
+        this.stock = stock
+        this.url = url
     }
 }

@@ -1,26 +1,15 @@
-package com.example.firebasecrud;
+package com.example.firebasecrud
 
-import android.view.View;
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 
-import androidx.recyclerview.widget.RecyclerView;
+abstract class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
+    var currentPosition = 0
+        private set
 
-
-public abstract class ViewHolder extends RecyclerView.ViewHolder {
-
-    private int mCurrentPosition;
-
-    public ViewHolder(View itemView) {
-        super(itemView);
-    }
-
-    protected abstract void clear();
-
-    public void onBind(int position) {
-        mCurrentPosition = position;
-        clear();
-    }
-
-    public int getCurrentPosition() {
-        return mCurrentPosition;
+    protected abstract fun clear()
+    open fun onBind(position: Int) {
+        currentPosition = position
+        clear()
     }
 }
