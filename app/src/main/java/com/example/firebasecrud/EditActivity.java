@@ -55,24 +55,24 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Product charater = dataSnapshot.getValue(Product.class);
+                Product character = dataSnapshot.getValue(Product.class);
 
-                if (charater.getDescripcion() != null) {
-                    mdescripcionEditText.setText(charater.getDescripcion());
+                if (character.getDescripcion() != null) {
+                    mdescripcionEditText.setText(character.getDescripcion());
                 }
 
-                if (charater.getCategoria()!= null) {
-                    mcategoriaEditText.setText(charater.getCategoria());
+                if (character.getCategoria()!= null) {
+                    mcategoriaEditText.setText(character.getCategoria());
                 }
 
-                if (charater.getPrecio() != null) {
-                    mprecioEditText.setText(String.valueOf(charater.getPrecio()));
+                if (character.getPrecio() != null) {
+                    mprecioEditText.setText(String.valueOf(character.getPrecio()));
                 }
 
-                mstockEditText.setText(String.valueOf(charater.getStock()));
+                mstockEditText.setText(String.valueOf(character.getStock()));
 
 
-                mUrlEditText.setText(String.valueOf(charater.getUrl()));
+                mUrlEditText.setText(String.valueOf(character.getUrl()));
 
             }
 
@@ -85,7 +85,7 @@ public class EditActivity extends AppCompatActivity {
         mCharacterButton.setOnClickListener(v -> {
             mDatabaseReference.child("descripcion").setValue(mdescripcionEditText.getText().toString());
             mDatabaseReference.child("categoria").setValue(mcategoriaEditText.getText().toString());
-            mDatabaseReference.child("precio").setValue(Float.parseFloat(mprecioEditText.getText().toString()));
+            mDatabaseReference.child("precio").setValue(Float.valueOf(mprecioEditText.getText().toString()));
             mDatabaseReference.child("stock").setValue(Integer.parseInt(mstockEditText.getText().toString()));
             mDatabaseReference.child("url").setValue(Integer.parseInt(mUrlEditText.getText().toString()));
             finish();
