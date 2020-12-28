@@ -33,17 +33,17 @@ class EditActivity : AppCompatActivity() {
         mDatabaseReference!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val character = dataSnapshot.getValue(Product::class.java)
-                if (character!!.descripcion != null) {
+                if (character?.descripcion != null) {
                     mdescripcionEditText!!.setText(character.descripcion)
                 }
-                if (character.categoria != null) {
+                if (character?.categoria != null) {
                     mcategoriaEditText!!.setText(character.categoria)
                 }
-                if (character.precio != null) {
+                if (character?.precio != null) {
                     mprecioEditText!!.setText(character.precio.toString())
                 }
-                mstockEditText!!.setText(String.valueOf(character.stock))
-                mUrlEditText!!.setText(String.valueOf(character.url))
+                mstockEditText!!.setText(String.valueOf(character?.stock))
+                mUrlEditText!!.setText(String.valueOf(character?.url))
             }
 
             override fun onCancelled(error: DatabaseError) {
